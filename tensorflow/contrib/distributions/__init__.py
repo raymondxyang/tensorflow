@@ -49,6 +49,7 @@ from tensorflow.contrib.distributions.python.ops.sample_stats import *
 from tensorflow.contrib.distributions.python.ops.vector_exponential_diag import *
 from tensorflow.contrib.distributions.python.ops.vector_laplace_diag import *
 from tensorflow.contrib.distributions.python.ops.wishart import *
+
 from tensorflow.python.ops.distributions.bernoulli import *
 from tensorflow.python.ops.distributions.beta import *
 from tensorflow.python.ops.distributions.categorical import *
