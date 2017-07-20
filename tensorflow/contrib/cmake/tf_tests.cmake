@@ -153,6 +153,15 @@ if (tensorflow_BUILD_PYTHON_TESTS)
     # NOTE: tensor_forest tests in tensor_forest/hybrid/... still don't pass.
     "${tensorflow_source_dir}/tensorflow/contrib/tensor_forest/client/*_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/tensor_forest/python/*_test.py"
+    # Adding other major packages
+    "${tensorflow_source_dir}/tensorflow/contrib/legacy_seq2seq/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/linalg/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/graph_editor/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/bayesflow/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/framework/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/keras/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/distributions/*_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/learn/*_test.py"
   )
 
   # exclude the ones we don't want
@@ -176,6 +185,9 @@ if (tensorflow_BUILD_PYTHON_TESTS)
     # flaky tests
     "${tensorflow_source_dir}/tensorflow/python/kernel_tests/cwise_ops_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/tfprof/python/tools/tfprof/internal/run_metadata_test.py"
+    # dask need fix
+    "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/generator_io_test.py"
+    "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/graph_io_test.py"
   )
   if (WIN32)
     set(tf_test_src_py_exclude
@@ -206,11 +218,11 @@ if (tensorflow_BUILD_PYTHON_TESTS)
       "${tensorflow_source_dir}/tensorflow/python/kernel_tests/py_func_test.py"
       # training tests
       "${tensorflow_source_dir}/tensorflow/python/training/basic_session_run_hooks_test.py"  # Needs tf.contrib fix.
-      "${tensorflow_source_dir}/tensorflow/python/training/evaluation_test.py"  # Needs tf.contrib fix.
+      #"${tensorflow_source_dir}/tensorflow/python/training/evaluation_test.py"  # Needs tf.contrib fix.
       "${tensorflow_source_dir}/tensorflow/python/training/localhost_cluster_performance_test.py"  # Needs portpicker.
-      "${tensorflow_source_dir}/tensorflow/python/training/monitored_session_test.py"  # Needs tf.contrib fix.
+      #"${tensorflow_source_dir}/tensorflow/python/training/monitored_session_test.py"  # Needs tf.contrib fix.
       "${tensorflow_source_dir}/tensorflow/python/training/quantize_training_test.py"  # Needs quantization ops to be included in windows.
-      "${tensorflow_source_dir}/tensorflow/python/training/saver_large_variable_test.py"  # Overflow error.
+      #"${tensorflow_source_dir}/tensorflow/python/training/saver_large_variable_test.py"  # Overflow error.
       "${tensorflow_source_dir}/tensorflow/python/training/supervisor_test.py"  # Flaky I/O error on rename.
       "${tensorflow_source_dir}/tensorflow/python/training/sync_replicas_optimizer_test.py"  # Needs portpicker.
       "${tensorflow_source_dir}/tensorflow/python/kernel_tests/array_ops_test.py"  # depends on python/framework/test_ops
@@ -224,6 +236,17 @@ if (tensorflow_BUILD_PYTHON_TESTS)
       "${tensorflow_source_dir}/tensorflow/python/ops/cloud/bigquery_reader_ops_test.py"  # No libcurl support
       # Newly running on Windows since TensorBoard backend move. Fail on Windows and need debug.
       "${tensorflow_source_dir}/tensorflow/contrib/data/python/kernel_tests/dataset_constructor_op_test.py"  # Segfaults on Windows.
+      # Dask.Dataframe bugs on Window Build
+      "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/tests/dataframe/tensorflow_dataframe_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/data_feeder_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/io_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/graph_actions_test.py"
+      # Need extra build
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/conditional_distribution_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/conditional_transformed_distribution_test.py"
+      # Windows Path
+      "${tensorflow_source_dir}/tensorflow/contrib/framework/python/ops/checkpoint_ops_test.py" #TODO: Fix path
+      "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/models_test.py"
   )
   endif()
   list(REMOVE_ITEM tf_test_src_py ${tf_test_src_py_exclude})

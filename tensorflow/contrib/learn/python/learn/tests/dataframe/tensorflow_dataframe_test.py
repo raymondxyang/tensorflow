@@ -134,7 +134,7 @@ class TensorFlowDataFrameTestCase(test.TestCase):
         pandas_df, batch_size=10, shuffle=False)
 
     batch = tensorflow_df.run_one_batch()
-
+    
     np.testing.assert_array_equal(pandas_df.index.values, batch["index"],
                                   "Expected index {}; got {}".format(
                                       pandas_df.index.values, batch["index"]))
