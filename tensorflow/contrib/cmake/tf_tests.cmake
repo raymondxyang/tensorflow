@@ -247,6 +247,10 @@ if (tensorflow_BUILD_PYTHON_TESTS)
       # Windows Path
       "${tensorflow_source_dir}/tensorflow/contrib/framework/python/ops/checkpoint_ops_test.py" #TODO: Fix path
       "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/models_test.py"
+      # Related to Windows Multiprocessing https://github.com/fchollet/keras/issues/5071
+      "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/engine/training_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/utils/data_utils_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/callbacks_test.py"
   )
   endif()
   list(REMOVE_ITEM tf_test_src_py ${tf_test_src_py_exclude})
