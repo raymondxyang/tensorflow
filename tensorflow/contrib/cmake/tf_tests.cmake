@@ -185,9 +185,14 @@ if (tensorflow_BUILD_PYTHON_TESTS)
     # flaky tests
     "${tensorflow_source_dir}/tensorflow/python/kernel_tests/cwise_ops_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/tfprof/python/tools/tfprof/internal/run_metadata_test.py"
+<<<<<<< HEAD
     # dask need fix
     "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/generator_io_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/graph_io_test.py"
+=======
+    # Loading resources in contrib doesn't seem to work on Windows
+    "${tensorflow_source_dir}/tensorflow/contrib/tensor_forest/client/random_forest_test.py"
+>>>>>>> 49961e588d41d81716c3a976a2420b647bc54076
   )
   if (WIN32)
     set(tf_test_src_py_exclude

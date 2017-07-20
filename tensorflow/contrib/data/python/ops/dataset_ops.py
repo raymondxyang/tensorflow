@@ -235,7 +235,9 @@ class Iterator(object):
     nest.assert_same_structure(output_types, output_shapes)
     string_handle = ops.convert_to_tensor(string_handle, dtype=dtypes.string)
     iterator_resource = gen_dataset_ops.iterator_from_string_handle(
-        string_handle)
+        string_handle,
+        output_types=nest.flatten(output_types),
+        output_shapes=nest.flatten(output_shapes))
     return Iterator(iterator_resource, None, output_types, output_shapes)
 
   @property
@@ -1931,18 +1933,26 @@ class FilterDataset(Dataset):
 class TextLineDataset(Dataset):
   """A `Dataset` comprising lines from one or more text files."""
 
-  def __init__(self, filenames):
+  def __init__(self, filenames, compression_type=None):
     """Creates a `TextLineDataset`.
 
     Args:
       filenames: A `tf.string` tensor containing one or more filenames.
+      compression_type: A string, one of: `""` (no compression), `"ZLIB"`, or
+        `"GZIP"`.
     """
     super(TextLineDataset, self).__init__()
     self._filenames = ops.convert_to_tensor(
         filenames, dtype=dtypes.string, name="filenames")
+    if compression_type is not None:
+      self._compression_type = ops.convert_to_tensor(
+          compression_type, dtype=dtypes.string, name="compression_type")
+    else:
+      self._compression_type = constant_op.constant("", name="compression_type")
 
   def make_dataset_resource(self):
-    return gen_dataset_ops.text_line_dataset(self._filenames)
+    return gen_dataset_ops.text_line_dataset(self._filenames,
+                                             self._compression_type)
 
   @property
   def output_shapes(self):
