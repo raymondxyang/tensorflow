@@ -147,7 +147,6 @@ if (tensorflow_BUILD_PYTHON_TESTS)
     "${tensorflow_source_dir}/tensorflow/python/training/*_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/data/*_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/factorization/*_test.py"
-    "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/integration_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/seq2seq/python/kernel_tests/*_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/stateless/python/kernel_tests/*_test.py"
     # NOTE: tensor_forest tests in tensor_forest/hybrid/... still don't pass.
@@ -185,14 +184,11 @@ if (tensorflow_BUILD_PYTHON_TESTS)
     # flaky tests
     "${tensorflow_source_dir}/tensorflow/python/kernel_tests/cwise_ops_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/tfprof/python/tools/tfprof/internal/run_metadata_test.py"
-<<<<<<< HEAD
     # dask need fix
     "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/generator_io_test.py"
     "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/learn_io/graph_io_test.py"
-=======
     # Loading resources in contrib doesn't seem to work on Windows
     "${tensorflow_source_dir}/tensorflow/contrib/tensor_forest/client/random_forest_test.py"
->>>>>>> 49961e588d41d81716c3a976a2420b647bc54076
   )
   if (WIN32)
     set(tf_test_src_py_exclude
@@ -256,6 +252,27 @@ if (tensorflow_BUILD_PYTHON_TESTS)
       "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/engine/training_test.py"
       "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/utils/data_utils_test.py"
       "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/callbacks_test.py"
+      # Scipy needed
+      "${tensorflow_source_dir}/tensorflow/contrib/keras/python/keras/preprocessing/image_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/bijectors/sigmoid_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/binomial_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/chi2_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/geometric_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/inverse_gamma_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/logistic_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/mixture_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/mvn_diag_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/mvn_full_covariance_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/mvn_tril_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/negative_binomial_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/poisson_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/quantized_distribution_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/relaxed_bernoulli_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/relaxed_onehot_categorical_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/transformed_distribution_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/vector_student_t_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/distributions/python/kernel_tests/wishart_test.py"
+      "${tensorflow_source_dir}/tensorflow/contrib/learn/python/learn/estimators/kmeans_test.py"
   )
   endif()
   list(REMOVE_ITEM tf_test_src_py ${tf_test_src_py_exclude})
