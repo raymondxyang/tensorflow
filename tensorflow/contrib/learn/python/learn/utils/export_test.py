@@ -244,12 +244,10 @@ class ExportTest(test.TestCase):
     regressor.fit(x, y, steps=10, monitors=[export_monitor])
 
     self.assertTrue(gfile.Exists(export_dir))
-    # Catch exception for non-existing path for Windows build
-    #with self.assertRaises(errors.NotFoundError): 
-    try:
-      self.assertFalse(saver.checkpoint_exists(os.path.join( export_dir, '00000000', 'export')))
-    except errors.NotFoundError as e:
-      pass
+    # Catch exception for non-existing path
+    # with self.assertRaises(errors.NotFoundError): 
+    with self.assertRaises(errors.NotFoundError):
+      saver.checkpoint_exists(os.path.join( export_dir, '00000000', 'export'))
     self.assertTrue(saver.checkpoint_exists(os.path.join( export_dir, '00000010', 'export')))
     # Validate the signature
     signature = self._get_default_signature(os.path.join( export_dir, '00000010', 'export.meta'))
